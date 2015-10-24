@@ -1,6 +1,4 @@
 {
-    //First time coding Chrome extension
-
     "manifest_version": 2,
     "name": "CHSupremeBot",
     "description": "CHSupreme auto-checkout developed by Hao Chen, U of R ",
