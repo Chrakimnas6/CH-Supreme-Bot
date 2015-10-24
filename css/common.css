@@ -1,0 +1,413 @@
+@CHARSET "UTF-8";
+
+.yiton-custom-html button {
+	cursor: pointer;
+}
+
+.yiton-cart {
+	position: fixed;
+	right: 0;
+	top: 32px;
+	z-index: 100009999;
+}
+
+.yiton-cart a.yiton-btn-cart {
+	text-decoration: none;
+	display: block;
+	box-shadow: 0px 0px 5px #121717;
+	border-radius: 9px 0px 0px 9px;
+	opacity: 0.95;
+	padding: 6px;
+	color: #FFA245;
+	font-size: 13px;
+	background: #FFF;
+}
+
+.yiton-cart a.yiton-btn-cart img {
+	vertical-align: top;
+}
+
+.yiton-cart a.yiton-btn-cart:hover {
+	text-decoration: none;
+	background: #FFF;
+}
+
+div#yiton_cart_wrapper {
+	position: fixed;
+	top: 30px;
+	right: 0;
+	background: #fff;
+	border: 1px solid #F2F2F2;
+	padding: 5px;
+	z-index: 100000050;
+	width: 320px;
+	box-shadow: 0px 0px 8px #000000;
+	border-radius: 3px 0px 0px 3px;
+}
+
+div#yiton_cart_wrapper.closed {
+	right: -334px;
+	opacity: 0.3;
+}
+
+div#yiton_cart_wrapper a {
+	text-decoration: none;
+}
+
+div#yiton_cart_wrapper a:hover {
+	text-decoration: underline;
+}
+
+.yiton-cart-list-wrapper {
+	max-height: 382px;
+	overflow-y: auto;
+}
+
+.yiton-cart-item {
+	clear: both;
+	margin-bottom: 8px;
+	border: 1px solid #DADADA;
+	padding: 3px;
+}
+
+.yiton-cart-item-pic {
+	width: 50px;
+	float: left;
+	padding: 5px;
+}
+
+.yiton-cart-item-pic img {
+	width: 50px;
+	height: 50px;
+}
+
+.yiton-cart-item-info {
+	padding: 3px;
+	margin-left: 65px;
+}
+
+.yiton-cart-item-title a {
+	color: #6A605A;
+}
+
+.yiton-cart-item-price, .yt-cart-price {
+	font-family: Tahoma, Arail;
+	font-weight: bold;
+	color: #f40;
+}
+
+.yiton-cart-item-price em.price {
+	margin-left: 2px;
+}
+
+.yiton-cart-item-price .x {
+	font-weight: normal;
+	color: #666;
+}
+
+a.yt-btn-cart-all {
+	float: right;
+}
+
+a.yt-btn-cart-all.yt-btn-cart-all-lg {
+	float: none;
+	display: block;
+	background: #f40;
+	color: #fff;
+	text-align: center;
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 5px;
+	padding: 3px;
+	font-size: 14px;
+}
+
+a.yt-btn-cart-all.yt-btn-cart-all-lg:hover {
+	background: #f22d00;
+}
+
+a.yt-btn-cart-close {
+	position: absolute;
+	background: #f40;
+	bottom: 0;
+	left: -21px;
+	width: 20px;
+	height: 50px;
+	text-align: center;
+	color: #fff;
+	box-shadow: -2px 0px 2px #666;
+	line-height: 24px;
+	opacity: 0.9;
+	display: none;
+}
+
+.yt-op {
+	float: right;
+}
+
+.yt-op a {
+	font-weight: normal;
+	color: #C04242;
+}
+
+.yt-op a {
+	color: #C04242;
+}
+
+.yt-op.deleting a {
+	display: none;
+}
+
+.yt-op img {
+	display: none;
+}
+
+.yt-op.deleting img {
+	display: inline;
+}
+
+a.yt-btn-cart-close:hover {
+	opacity: 1;
+}
+
+div#yiton_cart_wrapper h3 {
+	border-bottom: 1px solid #E8E8E8;
+	color: #FF8E1B;
+	font-size: 1.2em;
+	padding: 5px 0px 5px;
+}
+
+div#yiton_cart_wrapper p.m {
+	padding: 10px 0px;
+	color: #3A576C;
+}
+
+.yt-cart-price {
+	padding: 5px 2px;
+	background: #EFEFEF;
+}
+
+.yt-cart-price label {
+	font-weight: normal;
+	color: #5A6C3F;
+}
+
+.yt-cart-price em {
+	margin-right: 10px;
+}
+
+dl.yiton-remark.yiton-custom-html {
+	background: #F6F6FF;
+	padding: 3px;
+}
+
+textarea#yiton_remark {
+	padding: 2px 3px;
+	width: 320px;
+	border-radius: 3px;
+}
+
+button#yiton_btn_add, button#yiton_login_btn {
+	display: block;
+	border: 1px solid #FFF;
+	color: #fff;
+	cursor: pointer;
+	margin-top: 8px;
+	background: #1E84EC;
+	border-radius: 2px;
+	font-family: sans-serif;
+	font-size: 16px;
+	padding: 8px 15px;
+	margin: 0 auto;
+}
+
+button#yiton_btn_add[disabled="disabled"] {
+	background: #9499A8;
+}
+
+button#yiton_btn_add:hover {
+	background: #7B49BA;
+}
+
+div#yiton_commission_wrapper {
+	background: #FFE4D0;
+	padding: 5px;
+	color: #662424;
+	margin-top: 5px;
+}
+
+#detail.yt-daigou .tb-skin .tb-action {
+  display: none;
+  opacity: 0;
+}
+
+/* 宝贝详情页 - 价格显示 */
+.yt-price-wrapper {
+    margin: 3px 0px;
+}
+
+.yt-price-wrapper .yt-price {
+    color: #c40000;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 0px 10px;
+}
+
+.yt-price-wrapper .yt-price-old {
+    color: #63615F;
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: line-through;
+}
+
+.yt-price-freight {
+  display: inline-block;
+  border: 1px dashed #666;
+  margin-right: 10px;
+  padding: 0px 3px;
+  color: #C40000;
+}
+
+#detail.yt-other-currencies .tb-property-x .tb-promo-hd .tb-promo-price,
+#detail.yt-other-currencies .tm-promo-panel.tm-promo-cur .tm-promo-price .tm-price,
+#detail.yt-other-currencies .tm-promo-panel.tm-promo-cur .tm-promo-price .tm-yen {
+  font-weight: normal !important;
+  color: #6C6C6C !important;
+  font-size: 20px;
+}
+
+#detail.yt-other-currencies strong#J_StrPrice {
+  font-weight: normal;
+  color: rgb(60,60,60);
+}
+dl#J_StrPriceModBox .tm-yen, dl#J_StrPriceModBox .tm-price {
+  font-weight: normal !important;
+  color: rgb(60,60,60) !important;
+}
+/* end 宝贝详情页 - 价格显示 */
+
+.yt-added-img {
+	float: left;
+	width: 150px;
+}
+
+.yt-added-img img {
+	width: 138px;
+	max-height: 150px;
+	border: 1px solid #EFDEDE;
+	padding: 5px;
+}
+
+.yt-added-detail {
+	float: left;
+	text-align: left;
+	padding: 0px 5px;
+}
+
+.yt-added-button {
+	margin-top: 10px;
+}
+
+.sweet-alert {
+	padding: 8px 5px 10px !important;
+	box-shadow: rgba(0, 0, 0, 0.239216) 0px 0px 14px, rgba(0, 0, 0, 0.478431) 0px 5px 10px;
+	opacity: 0.85;
+}
+.sweet-alert .yt-added-detail p {
+	text-align: left;
+	font-size: 12px;
+	font-family: Arial;
+}
+
+.sweet-alert .yt-added-detail h3 {
+	text-align: left;
+	color: #FF8E2B;
+}
+
+.yiton-swal .sa-button-container {
+	display: none;
+}
+
+.sweet-alert h2 {
+border-bottom: 1px solid #E8E8E8;
+padding-bottom: 4px;
+  margin: 10px 0px !important;
+}
+.sweet-alert>p {
+	padding-top: 4px;
+}
+
+/* login form*/
+div#yiton_login_wrapper input {
+	display: block;
+}
+
+div#yiton_login_wrapper .sa-input-error {
+	top: 23px;
+	right: 9px;
+}
+/* end login form*/
+
+/* 自动填写地址 */
+#yiton_auto_fill, #auto_fill_planb {
+	text-align: center;
+	margin-left: 15px;
+	line-height: 20px;
+	font-size: 14px;
+	z-index: 999;
+	width: auto;
+	background: #4262AB;
+	color: #FFF;
+	font-weight: bold;
+	border: none;
+	padding: 5px;
+}
+
+#yiton_auto_fill:hover, #auto_fill_planb:hover {
+	background: #140C91;
+}
+#yiton_auto_fill.danger, #auto_fill_planb.danger {
+	background: #f40;
+}
+#yiton_auto_fill.danger:hover, #auto_fill_planb.danger:hover {
+	background: #f50;
+}
+
+/* 收货地址 */
+.yt-being-filled {
+	background: #F9FFDD;
+}
+
+.yiton-custom-html.clipboard-text {
+  background: #5342A3;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  padding: 2px 2px 0px 5px;
+  color: #fff;
+  border-radius: 3px;
+  font-family: tahoma,arial,\5b8b\4f53,sans-serif;
+  width: 800px;
+}
+textarea.yiton-custom-html.clipboard-text {
+  background: #F6F6F6;
+  color: #666;
+}
+/* end 收货地址 */
+
+
+.yiton-custom-html button[disabled="disabled"] {
+	cursor: no-drop;
+	background: #A1A1A1;
+}
+.yiton-custom-html button[disabled="disabled"]:hover {
+	background: #A1A1A1;
+}
+
+textarea.tt-content {
+  width: 100%;
+  padding: 5px;
+  border-radius: 2px;
+  border: 1px solid #6592BB;
+    overflow: hidden;
+    background: rgb(246, 246, 246);
+}

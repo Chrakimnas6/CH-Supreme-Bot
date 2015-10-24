@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style>
+body {
+	font-family: sans-serif;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	width: 360px;
+	/* min-height: 380px; */
+}
+
+body a {
+	color: #329B93;
+}
+
+body a:hover {
+	text-decoration: none;
+}
+
+input[type="checkbox"], label {
+	cursor: pointer;
+}
+
+button[disabled="disabled"]:hover {
+	cursor: no-drop;
+}
+
+hr {
+	margin: 8px !important;
+	padding: 0;
+}
+div.sweet-alert{
+min-width: 336px;
+}
+select.form-control.key {
+	display: inline;
+	width: 95px;
+	margin: 0 2px;
+	font-weight: bold;
+	font-size: 12px;
+	color: #428BCA;
+}
+div.col-xs-12 {
+padding:0;
+}
+</style>
+<script type="text/javascript" src="../js/libs/jquery.min.js"></script>
+<script type="text/javascript" src="../js/libs/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/libs/underscore-min.js"></script>
+<script type="text/javascript" src="../js/inc.js"></script>
+<script type="text/javascript" src="../js/options/options.helper.js"></script>
+<script type="text/javascript" src="../js/options/options.handler.js"></script>
+<script type="text/javascript" src="../js/popup.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<script type="text/javascript" src="../js/libs/sweetalert.min.js"></script>
+<link rel="stylesheet" href="../css/sweetalert.css">
+<link rel="stylesheet" href="../css/sweetalert-themes/google/google.css">
+</head>
+
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12">
+		<!-- 基本设置 -->
+		<div class="panel panel-default" id="pos_custom_normal">
+			<div class="panel-heading">
+				<span class="extension-name"></span>
+				<a style="float:right;" href="options.html" target="_blank"><span class="glyphicon glyphicon-cog"></span> 设置</a>
+			</div>
+				<div class="panel-body">
+					<form role="form" class="form-options">
+						<div class="form-group">
+							<div class="checkbox">
+								<h4>
+								<label><input type="checkbox" class="option-field auto-save" id="enableExtension"> 开启插件</label>
+								</h4>
+							</div>							
+						</div>
+						<div class="form-group">
+							<div class="checkbox">
+								<label><input type="checkbox" class="option-field auto-save" id="checkCart"> 检查购物车</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="checkbox">
+								<label><input type="checkbox" class="option-field auto-save" id="autoCheckout"> 自动结算</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="checkbox">
+								<label><input type="checkbox" class="option-field auto-save" id="blockAssets"> 屏蔽一些js,css什么的</label>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="alert alert-default">
+			<a target="_blank" href="http://www.supremenewyork.com/shop/all">
+				<img src="../images/supreme_logo.png" alt="">
+			</a>
+		</div>
+	</div>
+	<br/>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+{
+    //First time coding Chrome extension
+
+    "manifest_version": 2,
+    "name": "CHSupremeBot",
+    "description": "CHSupreme auto-checkout developed by Hao Chen, U of R ",
+    "version": "1.0.1",
+    "icons": {
+        "16": "images/icon.png",
+        "48": "images/icon.png",
+        "128": "images/icon.png"
+    },
+    "browser_action": {
+        "default_title": "Supreme New York Assistant",
+        "default_icon": "images/icon.png",
+        "default_popup": "html/popup.html"
+    },
+    "options_page": "html/options.html",
+    "background": {
+        "scripts": ["js/libs/underscore-min.js", "js/inc.js", "js/background.js"]
+    },
+    "permissions": [
+        "cookies",
+        "notifications",
+        "contextMenus",
+        "tabs",
+        "http://*/",
+        "https://*/*",
+        "storage",
+        "background",
+        "contextMenus",
+        "clipboardRead",
+        "clipboardWrite",
+        "activeTab",
+        "webRequest",
+        "webRequestBlocking"
+    ],
+
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "content_scripts": [
+    	{
+    		"matches": [
+    			"*://www.supremenewyork.com/shop/*",
+    			"*://www.supremenewyork.com/checkout*"
+    		],
+    		"run_at": "document_start",
+    		"all_frames":true,
+    		"js": [
+    			"js/libs/jquery.min.js",
+    			"js/libs/underscore-min.js",
+    			"js/inc.js",
+    			"js/supreme/supreme.js"
+    		],
+    		"css": ["css/common.css"]
+    	},
+    	{
+            "matches": [
+            	"*://www.supremenewyork.com/shop/*",
+            	"*://www.supremenewyork.com/checkout*"
+            ],
+            "run_at": "document_start",
+            "js": [
+            	"js/content.js"
+            ],
+            "css": ["css/sweetalert.css", "css/sweetalert-themes/google/google.css"],
+            "all_frames": true
+        },
+        {
+        	"matches": [
+        		"*://www.supremenewyork.com/shop/all*",
+        		"*://www.supremenewyork.com/shop/new"
+        	],
+        	"js": [
+        		"js/supreme/shop.js"
+        	],
+        	"run_at": "document_start"
+        },
+        {
+        	"matches": [
+        		"*://www.supremenewyork.com/shop/shirts/*",
+        		"*://www.supremenewyork.com/shop/tops-sweaters/*",
+        		"*://www.supremenewyork.com/shop/pants/*",
+        		"*://www.supremenewyork.com/shop/shorts/*",
+        		"*://www.supremenewyork.com/shop/hats/*",
+        		"*://www.supremenewyork.com/shop/accessories/*",
+        		"*://www.supremenewyork.com/shop/skate/*"
+        	],
+        	"js": [
+        		"js/supreme/item.js"
+        	],
+        	"run_at": "document_start"
+        },
+        {
+        	"matches": [
+        		"*://www.supremenewyork.com/checkout*"
+        	],
+        	"js": [
+        		"js/supreme/checkout.js"
+        	],
+        	"run_at": "document_start"
+        },
+        {
+        	"matches": [
+        		"*://www.supremenewyork.com/shop/cart*"
+        	],
+        	"js": [
+        		"js/supreme/cart.js"
+        	],
+        	"run_at": "document_start"
+        }
+    ],
+    "web_accessible_resources": [
+    	"js/*",
+    	"images/*"
+    ]
+}

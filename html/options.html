@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title class="extension-name"></title>
+<style>
+html {
+	min-height: 450px;
+	height: 100%;
+}
+
+body {
+	font-family: sans-serif;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	min-height: 450px;
+	overflow-y: hidden;
+	height: 100%;
+	background-color: #f5f5f5;
+}
+::-webkit-input-placeholder { color:#B6A1A1 !important;}
+.container {
+	min-height: 450px;
+	height: 100%;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+.container>.row {
+	min-height: 450px;
+	height: 100%;
+}
+
+input[type="checkbox"], input[type="radio"] {
+	cursor: pointer;
+}
+input.input-xs {
+  padding: 3px 5px;
+  display: inline-block;
+  height: 26px;
+  width: auto;
+  border-radius: 2px;
+}
+select.form-control {
+  padding: 3px;
+  height: 26px;
+  display: inline-block;
+  width: auto;
+}
+hr {
+	margin: 5px 0;
+}
+
+h4 {
+	margin: 5px 0px;
+}
+
+.form-group {
+	margin-bottom: 8px;
+}
+
+select.key {
+	display: inline;
+	width: 98px;
+	color: #2912C8
+}
+
+div.main-col {
+	min-height: 450px;
+	height: 100%;
+	overflow-y: scroll;
+	background-color: white;
+	padding: 5px 30px 200px 10px;
+	font-size: 12px;
+}
+
+div.nav-col.col-xs-3 {
+	min-height: 450px;
+	height: 100%;
+	background: #e5e5e5;
+}
+table.table-checkout {
+  float: left;
+}
+table.table-checkout.table-left {
+margin-right: 8px;
+width: 55%;
+}
+table.table-checkout.table-right {
+width: 43%;
+}
+form input.input-long {
+  width: 100%;
+}
+form select {
+  padding: 3px;
+}
+select[disabled="disabled"] {
+  background: #E1E1E1;
+  cursor: no-drop;
+}
+</style>
+<script type="text/javascript" src="../js/libs/jquery.min.js"></script>
+<script type="text/javascript" src="../js/libs/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/libs/underscore-min.js"></script>
+<script type="text/javascript" src="../js/libs/jquery-sortable-min.js"></script>
+<script type="text/javascript" src="../js/libs/jquery.scrollTo.js"></script>
+<script type="text/javascript" src="../js/libs/URI.min.js"></script>
+<script type="text/javascript" src="../js/inc.js"></script>
+<script type="text/javascript" src="../js/options/hotkey.helper.js"></script>
+<script type="text/javascript" src="../js/options/options.helper.js"></script>
+<script type="text/javascript" src="../js/options/options.handler.js"></script>
+<script type="text/javascript" src="../js/options.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<script type="text/javascript" src="../js/libs/sweetalert.min.js"></script>
+<link rel="stylesheet" href="../css/sweetalert.css">
+<link rel="stylesheet" href="../css/sweetalert-themes/google/google.css">
+</head>
+
+<body>
+
+<div class="container">
+	<div class="row">
+	
+		<!-- 左侧导航 -->
+		<div class="nav-col col-xs-3">
+			<div class="panel panel-default" id="nav_wrapper">
+				<div class="panel-heading"><span class="extension-name"></span></div>
+				<div class="panel-body">
+					<div class="list-group" id="nav_link_list">
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 右侧 -->
+		<div class="col-xs-9 main-col default-pos" id="main">
+		
+			<!-- 基本设置 -->
+			<div class="panel panel-default default-pos" id="pos_custom_normal">
+				<div class="panel-heading"><span class="glyphicon glyphicon-cog"></span> 基本设置</div>
+				<div class="panel-body">
+					<form role="form" class="form-options">
+						<div class="form-group">
+							<div class="checkbox">
+								<label><input type="checkbox" class="option-field auto-save" id="enableExtension"> 开启插件</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="checkbox">
+								<label><input type="checkbox" class="option-field auto-save" id="checkCart"> 检查购物车</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="checkbox">
+								<label><input type="checkbox" class="option-field auto-save" id="autoCheckout"> 自动结算</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="checkbox">
+								<label><input type="checkbox" class="option-field auto-save" id="blockAssets"> 屏蔽一些js,css什么的</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;搜索重试间隔：</label>
+							<input type="number" min="0" class="option-field form-control input-xs" id="intervalRetryFinding" placeholder="second"> ms (默认1000)
+						</div>
+						<div class="form-group">
+							<label> Sold out检查间隔：</label>
+							<input type="number" min="0" class="option-field form-control input-xs" id="intervalCheckSoldout" placeholder="second"> ms (默认8000)
+						</div>
+						<div class="form-group">
+							<button class="btn btn-sm btn-primary btn-save-options" type="button">保存</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- end 基本设置 -->
+			
+			<!-- TYO Finder -->
+			<div class="panel panel-default" id="pos_tyo_finder">
+				<div class="panel-heading"><span class="glyphicon glyphicon-search"></span> TYO Finder</div>
+				<div class="panel-body">
+					<form role="form" class="form-options is-node" data-node="tyoFinder">
+						
+						<div class="form-group">
+							<label>关键词：</label>
+							<input type="text" class="option-field form-control input-xs auto-save" id="keyword" size="60" placeholder="keyword">
+						</div>
+						
+						<div class="form-group">						
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;颜色：</label>
+							<input type="text" class="option-field form-control input-xs auto-save" id="color" placeholder="color">
+						</div>
+						
+						<div class="form-group">
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;尺码：</label>
+							<input type="text" id="size" class="option-field form-control input-xs auto-save" placeholder="size">
+						</div>
+						
+						<div class="form-group">
+							<button class="btn btn-sm btn-primary btn-save-options" type="button">保存</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- end TYO Finder -->
+			
+			<!-- TYO Checkout -->
+			<div class="panel panel-success" id="pos_tyo_checkout">
+				<div class="panel-heading"><span class="glyphicon glyphicon-usd"></span> TYO Checkout</div>
+				<div class="panel-body">
+					<form role="form" class="form-options is-node" data-node="tyoCheckoutInfo">
+						<div class="form-group">
+						<table class="table-bordered table condensed table-striped table-checkout table-left">
+							<tbody>
+								<tr>
+									<td>姓名</td>
+									<td>
+										<input type="text" id="credit_card_last_name" name="credit_card[last_name]" class="option-field form-control input-xs required" placeholder="credit card last name">
+	
+										<input type="text" id="credit_card_first_name" name="credit_card[first_name]" class="option-field form-control input-xs required" placeholder="credit card first name">
+									</td>
+								</tr>
+								<tr>
+									<td>Email</td>
+									<td colspan="2">
+										<input type="email" id="order_email" name="order[email]" class="option-field form-control input-xs required" placeholder="email">
+									</td>
+								</tr>
+								<tr>
+									<td>电话</td>
+									<td colspan="2">
+										<input type="text" id="order_tel" name="order[tel]" class="option-field form-control input-xs required" placeholder="tel">
+									</td>
+								</tr>
+								<tr>
+									<td>县</td>
+									<td colspan="2">
+										<select name="order[billing_state]" id="order_billing_state" class="option-field form-control required keep-origin" placeholder="billing state">
+											<option value="">——未选——</option>
+											<option value=" 北海道"> 北海道</option>
+											<option value=" 青森県"> 青森県</option>
+											<option value=" 岩手県"> 岩手県</option>
+											<option value=" 宮城県"> 宮城県</option>
+											<option value=" 秋田県"> 秋田県</option>
+											<option value=" 山形県"> 山形県</option>
+											<option value=" 福島県"> 福島県</option>
+											<option value=" 茨城県"> 茨城県</option>
+											<option value=" 栃木県"> 栃木県</option>
+											<option value=" 群馬県"> 群馬県</option>
+											<option value=" 埼玉県"> 埼玉県</option>
+											<option value=" 千葉県"> 千葉県</option>
+											<option value=" 東京都"> 東京都</option>
+											<option value=" 神奈川県"> 神奈川県</option>
+											<option value=" 新潟県"> 新潟県</option>
+											<option value=" 富山県"> 富山県</option>
+											<option value=" 石川県"> 石川県</option>
+											<option value=" 福井県"> 福井県</option>
+											<option value=" 山梨県"> 山梨県</option>
+											<option value=" 長野県"> 長野県</option>
+											<option value=" 岐阜県"> 岐阜県</option>
+											<option value=" 静岡県"> 静岡県</option>
+											<option value=" 愛知県"> 愛知県</option>
+											<option value=" 三重県"> 三重県</option>
+											<option value=" 滋賀県"> 滋賀県</option>
+											<option value=" 京都府"> 京都府</option>
+											<option value=" 大阪府"> 大阪府</option>
+											<option value=" 兵庫県"> 兵庫県</option>
+											<option value=" 奈良県"> 奈良県</option>
+											<option value=" 和歌山県"> 和歌山県</option>
+											<option value=" 鳥取県"> 鳥取県</option>
+											<option value=" 島根県"> 島根県</option>
+											<option value=" 岡山県"> 岡山県</option>
+											<option value=" 広島県"> 広島県</option>
+											<option value=" 山口県"> 山口県</option>
+											<option value=" 徳島県"> 徳島県</option>
+											<option value=" 香川県"> 香川県</option>
+											<option value=" 愛媛県"> 愛媛県</option>
+											<option value=" 高知県"> 高知県</option>
+											<option value=" 福岡県"> 福岡県</option>
+											<option value=" 佐賀県"> 佐賀県</option>
+											<option value=" 長崎県"> 長崎県</option>
+											<option value=" 熊本県"> 熊本県</option>
+											<option value=" 大分県"> 大分県</option>
+											<option value=" 宮崎県"> 宮崎県</option>
+											<option value=" 鹿児島県"> 鹿児島県</option>
+											<option value=" 沖縄県"> 沖縄県</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>区</td>
+									<td colspan="2">
+										<input type="text" id="order_billing_city" name="order[billing_city]" class="option-field form-control input-xs required" placeholder="billing city">
+									</td>
+								</tr>
+								<tr>
+									<td>住址</td>
+									<td colspan="2">
+										<input type="text" id="order_billing_address" name="order[billing_address]" class="option-field form-control input-xs required input-long" placeholder="billing address">
+									</td>
+								</tr>
+								<tr>
+									<td>邮编</td>
+									<td colspan="2">
+										<input type="text" id="order_billing_zip" name="order[billing_zip]" class="option-field form-control input-xs " placeholder="billing zip">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<table class="table-bordered table condensed table-striped table-checkout table-right">
+							<tbody>
+								<tr>
+									<td>卡种类</td>
+									<td>
+										<select id="credit_card_type" name="credit_card[type]" class="required option-field form-control">
+											<option value="visa">Visa</option>
+											<option value="american_express">American Express</option>
+											<option value="master">Mastercard</option>
+											<option value="cod">代金引換</option>
+										</select>
+									</td>
+								</tr>
+								
+								<tr>
+									<td>卡号</td>
+									<td>
+										<input type="text" id="onb" name="credit_card[number]" class="option-field form-control input-xs required" placeholder="credit card number" />
+									</td>
+								</tr>
+								<tr>
+									<td>有效期限</td>
+									<td>
+										<select id="credit_card_month" name="credit_card[month]" class="option-field form-control required">
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+										</select>
+										
+										<select id="credit_card_year" name="credit_card[year]" class="option-field form-control required">
+											<option value="2015">2015</option>
+											<option value="2016">2016</option>
+											<option value="2017">2017</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+											<option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022">2022</option>
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+											<option value="2025">2025</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>CVV代码</td>
+									<td>
+										<input type="text" id="number_v" name="credit_card[verification_value]" class="option-field form-control input-xs required" placeholder="verification value">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					
+					</div>
+					
+					<div class="form-group" style="clear:both;">
+					<hr/>
+						<button class="btn btn-sm btn-primary btn-save-options" type="button">保存</button>
+					</div>
+					
+					</form>
+				</div>
+			</div>
+			<!-- end TYO Checkout -->
+			
+			<!--  NYC Finder -->
+			<div class="panel panel-default" id="pos_nyc_finder">
+				<div class="panel-heading"><span class="glyphicon glyphicon-search"></span> NYC Finder</div>
+				<div class="panel-body">
+					<form role="form" class="form-options is-node" data-node="nycFinder">
+						
+						<div class="form-group">						
+							<label>关键词：</label>
+							<input type="text" class="option-field form-control input-xs auto-save" id="keyword" size="60" placeholder="keyword">
+						</div>
+						
+						<div class="form-group">						
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;颜色：</label>
+							<input type="text" class="option-field form-control input-xs auto-save" id="color" placeholder="color">
+						</div>
+						
+						<div class="form-group">						
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;尺码：</label>
+							<input type="text" class="option-field form-control input-xs auto-save" id="size" placeholder="size">
+						</div>
+						
+						<div class="form-group">
+							<button class="btn btn-sm btn-primary btn-save-options" type="button">保存</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- end NYC Finder -->
+			
+			<!-- NYC Checkout -->
+			<div class="panel panel-danger" id="pos_nyc_checkout">
+				<div class="panel-heading"><span class="glyphicon glyphicon-usd"></span> NYC Checkout</div>
+				<div class="panel-body">
+					<form role="form" class="form-options is-node" data-node="nycCheckoutInfo">
+						<div class="form-group">
+						<table class="table-bordered table condensed table-striped table-checkout table-left">
+							<tbody>
+								<tr>
+									<td width="100">name</td>
+									<td>
+										<input type="text" id="order_billing_name" name="order[billing_name]" class="option-field form-control input-xs required" placeholder="billing name">
+									</td>
+								</tr>
+								<tr>
+									<td>Email</td>
+									<td colspan="2">
+										<input type="email" id="order_email" name="order[email]" class="option-field form-control input-xs required" placeholder="email">
+									</td>
+								</tr>
+								<tr>
+									<td>tel</td>
+									<td colspan="2">
+										<input type="text" id="order_tel" name="order[tel]" class="option-field form-control input-xs required" placeholder="tel">
+									</td>
+								</tr>
+								
+								<tr>
+									<td>address</td>
+									<td colspan="2">
+										<input type="text" id="bo" name="order[billing_address]" class="option-field form-control input-xs required input-long" placeholder="billing address">
+										<br/><br/>
+										<input type="text" id="oba3" name="order[billing_address_2]" class="option-field form-control input-xs required input-long" placeholder="optional billing address">
+									</td>
+								</tr>
+								
+								<tr>
+									<td>zip</td>
+									<td colspan="2">
+										<input type="text" id="order_billing_zip" name="order[billing_zip]" class="option-field form-control input-xs " placeholder="billing zip">
+									</td>
+								</tr>
+								
+								<tr>
+									<td>city</td>
+									<td colspan="2">
+										<input type="text" id="order_billing_city" name="order[billing_city]" class="option-field form-control input-xs required" placeholder="billing city">
+									</td>
+								</tr>
+								
+								<!-- USA -->
+								<tr>
+									<td>state(USA)</td>
+									<td colspan="2">
+										<select id="order_billing_state_usa" name="order[billing_state]" class="option-field form-control input-xs state-usa">
+										<option value="">——未选——</option>
+										<option value="AL">AL</option>
+										<option value="AK">AK</option>
+										<option value="AS">AS</option>
+										<option value="AZ">AZ</option>
+										<option value="AR">AR</option>
+										<option value="CA">CA</option>
+										<option value="CO">CO</option>
+										<option value="CT">CT</option>
+										<option value="DE">DE</option>
+										<option value="DC">DC</option>
+										<option value="FM">FM</option>
+										<option value="FL">FL</option>
+										<option value="GA">GA</option>
+										<option value="GU">GU</option>
+										<option value="HI">HI</option>
+										<option value="ID">ID</option>
+										<option value="IL">IL</option>
+										<option value="IN">IN</option>
+										<option value="IA">IA</option>
+										<option value="KS">KS</option>
+										<option value="KY">KY</option>
+										<option value="LA">LA</option>
+										<option value="ME">ME</option>
+										<option value="MH">MH</option>
+										<option value="MD">MD</option>
+										<option value="MA">MA</option>
+										<option value="MI">MI</option>
+										<option value="MN">MN</option>
+										<option value="MS">MS</option>
+										<option value="MO">MO</option>
+										<option value="MT">MT</option>
+										<option value="NE">NE</option>
+										<option value="NV">NV</option>
+										<option value="NH">NH</option>
+										<option value="NJ">NJ</option>
+										<option value="NM">NM</option>
+										<option value="NY">NY</option>
+										<option value="NC">NC</option>
+										<option value="ND">ND</option>
+										<option value="MP">MP</option>
+										<option value="OH">OH</option>
+										<option value="OK">OK</option>
+										<option value="OR">OR</option>
+										<option value="PW">PW</option>
+										<option value="PA">PA</option>
+										<option value="PR">PR</option>
+										<option value="RI">RI</option>
+										<option value="SC">SC</option>
+										<option value="SD">SD</option>
+										<option value="TN">TN</option>
+										<option value="TX">TX</option>
+										<option value="UT">UT</option>
+										<option value="VT">VT</option>
+										<option value="VI">VI</option>
+										<option value="VA">VA</option>
+										<option value="WA">WA</option>
+										<option value="WV">WV</option>
+										<option value="WI">WI</option>
+										<option value="WY">WY</option>
+										</select>
+									</td>
+								</tr>
+														
+								<!-- // USD -->
+								
+								<!-- CANADA -->
+								<tr>
+									<td>province(Canada)</td>
+									<td colspan="2">
+										<select id="order_billing_state_canada" name="order[billing_state]" class="option-field form-control input-xs state-canada">
+											<option value="">——未选——</option>
+											<option value="AB">AB</option>
+											<option value="BC">BC</option>
+											<option value="MB">MB</option>
+											<option value="NB">NB</option>
+											<option value="NL">NL</option>
+											<option value="NT">NT</option>
+											<option value="NS">NS</option>
+											<option value="NU">NU</option>
+											<option value="ON">ON</option>
+											<option value="PE">PE</option>
+											<option value="QC">QC</option>
+											<option value="SK">SK</option>
+											<option value="YT">YT</option>
+										</select>
+									</td>
+								</tr>
+								<!-- // CANADA -->
+								
+								<tr>
+									<td>country</td>
+									<td colspan="2">
+										<select id="order_billing_country" name="order[billing_country]" class="option-field form-control input-xs">
+											<option value="USA">USA</option>
+											<option value="CANADA">CANADA</option>
+										</select>
+									</td>
+								</tr>
+								
+							</tbody>
+						</table>
+						
+						<table class="table-bordered table condensed table-striped table-checkout table-right">
+							<tbody>
+								<tr>
+									<td>type</td>
+									<td>
+										<select id="credit_card_type" name="credit_card[type]" class="required option-field form-control input-xs">
+											<option value="visa">Visa</option>
+											<option value="american_express">American Express</option>
+											<option value="master">Mastercard</option>
+											<option value="cod">代金引換</option>
+										</select>
+									</td>
+								</tr>
+								
+								<tr>
+									<td>number</td>
+									<td>
+										<input type="text" id="onb" name="credit_card[number]" class="option-field form-control input-xs required" placeholder="credit card number" />
+									</td>
+								</tr>
+								<tr>
+									<td>exp. date</td>
+									<td>
+										<select id="credit_card_month" name="credit_card[month]" class="option-field form-control input-xs required">
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+										</select>
+										
+										<select id="credit_card_year" name="credit_card[year]" class="option-field form-control input-xs required">
+											<option value="2015">2015</option>
+											<option value="2016">2016</option>
+											<option value="2017">2017</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+											<option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022">2022</option>
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+											<option value="2025">2025</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>CVV</td>
+									<td>
+										<input type="text" id="number_v" name="credit_card[verification_value]" class="option-field form-control input-xs required" placeholder="verification value">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					
+					</div>
+					
+					<div class="form-group" style="clear:both;">
+					<hr/>
+						<button class="btn btn-sm btn-primary btn-save-options" type="button">保存</button>
+					</div>
+					
+					</form>
+				</div>
+			</div>
+			<!-- end NYC Checkout -->
+		</div>
+	
+	</div>
+</div>
+</body>
+</html>
